@@ -1,7 +1,9 @@
 import{IsNotEmpty} from 'class-validator';
 export class CreateBillingDto{
-    readonly _id: string;
+    @IsNotEmpty()
     readonly id_user: string;
+    @IsNotEmpty()
     readonly id_order: string;
+    @IsNotEmpty()
     readonly total: number;
 }
