@@ -1,0 +1,42 @@
+version: '3'
+services:
+  mongo_db:
+    image: 'mongo'
+    container_name: mongo_db
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - data-db:/data/db
+    networks:
+      - web-net
+  redis_db:
+    image: 'redis:alpine'
+    container_name: redis_db
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - web-net
+  order-service:
+    restart: always
+    image: diegotony/order-micro:latest
+    # build: ./
+    environment:
+      - MONGO_URI=mongodb://mongo_db:27017/order
+      - REDIS_URI=redis://redis_db:6379
+    depends_on:
+      - mongo_db
+      - redis_db
+    links:
+      - mongo_db
+      - redis_db
+    networks:
+      - web-net
+
+volumes:
+  data-db:
+
+networks:
+  web-net:
+    driver: bridge
