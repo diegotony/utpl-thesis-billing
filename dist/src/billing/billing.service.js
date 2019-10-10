@@ -21,8 +21,16 @@ let BillingService = class BillingService {
         this.billingModel = billingModel;
     }
     async create(createBilllingDto) {
-        const createdBilling = new this.billingModel(createBilllingDto);
-        return await createdBilling.save();
+        try {
+            const createdBilling = new this.billingModel(createBilllingDto);
+            if (!createdBilling) {
+                throw new common_1.HttpException('Upps error ...', common_1.HttpStatus.BAD_REQUEST);
+            }
+            return await createdBilling.save();
+        }
+        catch (error) {
+            throw new common_1.HttpException(`Callback getUser ${error.message}`, common_1.HttpStatus.BAD_REQUEST);
+        }
     }
     async findAll() {
         const billlings = new this.billingModel.find({}).exec;
