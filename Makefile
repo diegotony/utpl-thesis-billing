@@ -1,4 +1,4 @@
-IMAGE := diegotony/orden-micro:travis
+IMAGE := diegotony/billing-micro:travis
 
 test:
 	true
