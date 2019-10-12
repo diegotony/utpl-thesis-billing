@@ -12,7 +12,9 @@ export class BillingController {
         return (await this.billingService.create(dto))
     }
 
-    // @Get()
-    // @HttpCode(200)
-    // async getBillings()
+    @Get()
+    @HttpCode(200)
+    async getBillings(){
+        return (await this.billingService.findAll())
+    }
 }
