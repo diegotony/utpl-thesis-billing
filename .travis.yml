@@ -1,6 +1,17 @@
 sudo: required
+language: java
+dist: trusty
 services:
   - 'docker'
+
+addons:
+  sonarcloud:
+    organization: "diegotony" # the key of the org you chose at step #3
+    token:
+      secure: $SONAR_TOKEN  # encrypted value of your token
+script:
+  - sonar-scanner
+
 before_install:
   - 'chmod +x .travis/main.sh'
   - './.travis/main.sh'
@@ -8,6 +19,8 @@ before_install:
 script:
   - 'make test'
   - 'make image'
+
+
 
 after_success:
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
