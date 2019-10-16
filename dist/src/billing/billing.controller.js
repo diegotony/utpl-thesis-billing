@@ -22,6 +22,9 @@ let BillingController = class BillingController {
     async createBilling(dto) {
         return (await this.billingService.create(dto));
     }
+    async getBillings() {
+        return (await this.billingService.findAll());
+    }
 };
 __decorate([
     common_1.Post(),
@@ -31,6 +34,13 @@ __decorate([
     __metadata("design:paramtypes", [create_billing_dto_1.CreateBillingDto]),
     __metadata("design:returntype", Promise)
 ], BillingController.prototype, "createBilling", null);
+__decorate([
+    common_1.Get(),
+    common_1.HttpCode(200),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], BillingController.prototype, "getBillings", null);
 BillingController = __decorate([
     common_1.Controller('billing'),
     __metadata("design:paramtypes", [billing_service_1.BillingService])

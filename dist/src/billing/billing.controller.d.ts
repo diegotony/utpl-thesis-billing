@@ -4,4 +4,5 @@ export declare class BillingController {
     private readonly billingService;
     constructor(billingService: BillingService);
     createBilling(dto: CreateBillingDto): Promise<import("../../shared/dto/billing.dto").Billing>;
+    getBillings(): Promise<import("../../shared/dto/billing.dto").Billing>;
 }

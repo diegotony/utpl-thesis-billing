@@ -29,12 +29,21 @@ let BillingService = class BillingService {
             return await createdBilling.save();
         }
         catch (error) {
+            console.log(error);
             throw new common_1.HttpException(`Callback getUser ${error.message}`, common_1.HttpStatus.BAD_REQUEST);
         }
     }
     async findAll() {
-        const billlings = new this.billingModel.find({}).exec;
-        return billlings;
+        try {
+            const billlings = this.billingModel.find().exec();
+            if (!billlings) {
+                throw new common_1.HttpException('Upps error ...', common_1.HttpStatus.BAD_REQUEST);
+            }
+            return billlings;
+        }
+        catch (error) {
+            throw new common_1.HttpException(`Callback getUser ${error.message}`, common_1.HttpStatus.BAD_REQUEST);
+        }
     }
 };
 BillingService = __decorate([

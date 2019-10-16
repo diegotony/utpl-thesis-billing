@@ -9,11 +9,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const billing_module_1 = require("./billing/billing.module");
 const mongoose_1 = require("@nestjs/mongoose");
+const config_1 = require("./config/config");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
-        imports: [billing_module_1.BillingModule, mongoose_1.MongooseModule.forRoot('mongodb://localhost/nest')],
+        imports: [billing_module_1.BillingModule, mongoose_1.MongooseModule.forRoot(`${config_1.default.MONGO_URI}`)],
         controllers: [],
         providers: [],
     })
