@@ -35,6 +35,11 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+dist/
+tmp/
+temp/
+$RECYCLE.BIN/
+npm-debug.log*
 
 # TypeScript v1 declaration files
 typings/

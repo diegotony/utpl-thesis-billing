@@ -1,0 +1,38 @@
+version: "3"
+services:
+  mongodb-billing:
+    image: 'mongo'
+    container_name: mongodb-billing
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-client:/data/db/client
+    # environment: 
+    #   - MONGODB_USERNAME=user
+    #   - MONGODB_PASSWORD=password
+    networks:
+      backend-client:
+
+  billing-micro:
+    build:
+      context: ./ 
+    restart: always
+    # image: diegotony/client-micro:travis
+    ports:
+      - "3011:3011"
+    environment:
+      - MONGO_HOST=mongodb-billing
+      - PORT=3011
+    depends_on:
+      - mongodb-billing
+    links:
+      - mongodb-billing
+    networks:
+      backend-client:
+
+volumes:
+  mongodb-client:
+networks:
+  backend-client:
+    driver: bridge
