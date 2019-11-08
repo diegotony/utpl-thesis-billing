@@ -1,11 +1,20 @@
 import { Module } from '@nestjs/common';
 import { BillingModule } from './billing/billing.module';
-import { MongooseModule} from '@nestjs/mongoose'
+import { MongooseModule } from '@nestjs/mongoose';
+import { TerminusOptionsService } from './services/terminus-options/terminus-options.service';
 import config from './config/config';
+import { TerminusModule } from '@nestjs/terminus';
 
 @Module({
-  imports: [BillingModule, MongooseModule.forRoot("mongodb://"+config.MONGO_HOST+"/"+config.MONGO_DB, {useNewUrlParser: true },)],
+  imports: [
+    BillingModule,
+    MongooseModule.forRoot(
+      'mongodb://' + config.MONGO_HOST + '/' + config.MONGO_DB,
+      { useNewUrlParser: true },
+    ),
+    TerminusModule.forRootAsync({useClass:TerminusOptionsService}),
+  ],
   controllers: [],
-  providers: [],
+  providers: [TerminusOptionsService],
 })
 export class AppModule {}
