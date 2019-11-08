@@ -1,4 +1,4 @@
-IMAGE := diegotony/billing-micro:travis
+IMAGE := diegotony/billing-micro:k8s
 
 test:
 	true

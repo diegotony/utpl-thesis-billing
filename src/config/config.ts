@@ -1,5 +1,7 @@
 export default {
-    MONGO_URI: process.env.MONGO_URI || 'mongodb://localhost/billing',
+    MONGO_HOST:process.env.MONGO_HOST || 'localhost',
+    MONGO_PORT:process.env.MONGO_PORT || '27017',
+    MONGO_DB:process.env.MONGO_DB || 'billing',
     REDIS_URI: process.env.REDIS_URI || 'redis://localhost:6379',
     PORT: process.env.PORT || '3001',
 };
