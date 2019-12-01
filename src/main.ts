@@ -1,23 +1,19 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
-import * as helmet from 'helmet';
-import * as rateLimit from 'express-rate-limit';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import config from './config/config';
+import { Transport } from '@nestjs/microservices';
+
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe());
-  app.use(helmet());
-  app.enableCors();
-  // app.use(csurf());
-  app.use(
-    rateLimit({
-      windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 100, // limit each IP to 100 requests per windowMs
-    }),
-  );
+ 
+  const app_micro = await NestFactory.createMicroservice(AppModule, {
+    transport: Transport.REDIS,options:{
+      url: 'redis://localhost:6379',
+    }
+  });
+  app_micro.listen(() => console.log('Billing-Microservice is listening'));
 
   const options = new DocumentBuilder()
   .setTitle('Billing api-rest')
@@ -27,7 +23,7 @@ async function bootstrap() {
   .build();
 
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api/billing', app, document);
+  SwaggerModule.setup('swagger/billing', app, document);
 
   await app.listen(config.PORT);
 }

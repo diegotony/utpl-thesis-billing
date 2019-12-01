@@ -4,6 +4,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { TerminusOptionsService } from './services/terminus-options/terminus-options.service';
 import config from './config/config';
 import { TerminusModule } from '@nestjs/terminus';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -12,9 +14,9 @@ import { TerminusModule } from '@nestjs/terminus';
       'mongodb://' + config.MONGO_HOST + '/' + config.MONGO_DB,
       { useNewUrlParser: true },
     ),
-    TerminusModule.forRootAsync({useClass:TerminusOptionsService}),
+    // TerminusModule.forRootAsync({useClass:TerminusOptionsService}),
   ],
-  controllers: [],
-  providers: [TerminusOptionsService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
