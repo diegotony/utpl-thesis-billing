@@ -4,19 +4,15 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import config from './config/config';
 import { Transport } from '@nestjs/microservices';
 
-
 async function bootstrap() {
-  
   const redis = await NestFactory.createMicroservice(AppModule, {
     transport: Transport.REDIS,
     options: {
-      url: 'redis://localhost:6379',
-
-    }
+      url: 'redis://' + config.REDIS_HOST + ':6379',
+    },
   });
   redis.listen(() => console.log('Billing-Microservice is listening'));
-  
-  
+
   const app = await NestFactory.create(AppModule);
   const options = new DocumentBuilder()
     .setTitle('Billing api-rest')
