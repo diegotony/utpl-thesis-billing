@@ -20,4 +20,9 @@ export class AppController {
     let data = this.appService.gatData(params.id);
     return res.json({ dd: data });
   }
+
+  @Get()
+  async hello() {
+    return { service: { status: true } };
+  }
 }
