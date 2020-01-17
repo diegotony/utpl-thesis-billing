@@ -3,11 +3,11 @@ dist: trusty
 services:
   - 'docker'
 
-addons:
-  sonarcloud:
-    organization: "diegotony" # the key of the org you chose at step #3
-    token:
-      secure: "0X8mNKPcgM0pMvvXdDtYIo86jKM6HQpXIKYSJ8aQ7BpLlwn1JOPOat7Omq/w6E6gxB3p7fAs6pvfOrTXCDSocZI952QHSEK4EF41XCjU5QUPeQvhknM6oGQTKY49bptaLzvyP9gtANEUxDJWzYpKWmAEehe1I2QeZ2xEnOLVm6TZK/6xhT8U/rX1q7CNM7+fOdLQLh9O+NG4SPRznuw3bwvYCCkCfqdnwitrwfJrYiPk0/PFHA5Z8vUrI6rIJPk5MP+LNtEoldOKvEX+T0FPLwb9sg1zBZJ5Yfrr9RDJniU9uKcYFopt5nzKQNvXEvXuz7Z7G/TwIBXzVkYvR1bEQ6GYpRGPML1DlZvY3LofNC0jbDPh89qZU90Z/U+dhQ1c3BVXpNhX6fH+bCCcXViwenugFqMIbGxmwBlPHzEXbE30MELEjihc/PN7D7UqNyVlj5C6/pDueEGphulcEWlV3odOmYx64viCqQNR7kAo5pJ+9J5Yq5uw0kutg0rD58N18zRCYKKh4U84uKUSYKjUia27NQfM05yS7vuZUtuMAurrmVzglA0U9UCYYnDJq8Obn/ueCxyUdhFz5nE3vARiRHCeJK0NWCP93ctxo0WFuD4K7PogockeToM1zxmJ6g2VztH4q+SUFD8MrK+qBFHCYWX140Bb7aq3UybMQIACF5M="
+#addons:
+#  sonarcloud:
+#    organization: "diegotony" # the key of the org you chose at step #3
+#    token:
+#      secure: "0X8mNKPcgM0pMvvXdDtYIo86jKM6HQpXIKYSJ8aQ7BpLlwn1JOPOat7Omq/w6E6gxB3p7fAs6pvfOrTXCDSocZI952QHSEK4EF41XCjU5QUPeQvhknM6oGQTKY49bptaLzvyP9gtANEUxDJWzYpKWmAEehe1I2QeZ2xEnOLVm6TZK/6xhT8U/rX1q7CNM7+fOdLQLh9O+NG4SPRznuw3bwvYCCkCfqdnwitrwfJrYiPk0/PFHA5Z8vUrI6rIJPk5MP+LNtEoldOKvEX+T0FPLwb9sg1zBZJ5Yfrr9RDJniU9uKcYFopt5nzKQNvXEvXuz7Z7G/TwIBXzVkYvR1bEQ6GYpRGPML1DlZvY3LofNC0jbDPh89qZU90Z/U+dhQ1c3BVXpNhX6fH+bCCcXViwenugFqMIbGxmwBlPHzEXbE30MELEjihc/PN7D7UqNyVlj5C6/pDueEGphulcEWlV3odOmYx64viCqQNR7kAo5pJ+9J5Yq5uw0kutg0rD58N18zRCYKKh4U84uKUSYKjUia27NQfM05yS7vuZUtuMAurrmVzglA0U9UCYYnDJq8Obn/ueCxyUdhFz5nE3vARiRHCeJK0NWCP93ctxo0WFuD4K7PogockeToM1zxmJ6g2VztH4q+SUFD8MrK+qBFHCYWX140Bb7aq3UybMQIACF5M="
 
 before_install:
   - 'chmod +x .travis/main.sh'
@@ -15,7 +15,7 @@ before_install:
 
 script:
     # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - sonar-scanner
+#  - sonar-scanner
   - make test
   - make image
 
@@ -30,4 +30,4 @@ after_success:
 # don't notify me when things fail
 
 notifications:
-  email: false
+  email: true
